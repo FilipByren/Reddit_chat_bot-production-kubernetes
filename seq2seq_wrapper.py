@@ -1,4 +1,4 @@
-import tensorflow as tf
+from tensorflow.python.framework import ops as tf
 import numpy as np
 import sys
 import time
