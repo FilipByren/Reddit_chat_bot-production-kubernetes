@@ -25,6 +25,8 @@ python Reddit_chatbot_production/mnist_client2.py --server=localhost:9500 --num_
 pip install tensorflow 
 pip install tensorflow-serving-api
 
+# fyi
+/usr/lib/python2.7/dist-packages
 
 # clone 
 git clone https://github.com/FilipByren/Reddit_chatbot_production.git

@@ -1,10 +1,8 @@
-from tensorflow.python.framework import ops
 import numpy as np
 import sys
 import time
 import os
 import tensorflow as tf
-import tensorflow.contrib
 
 class Seq2Seq(object):
 
@@ -29,7 +27,7 @@ class Seq2Seq(object):
         def __graph__():
 
             # placeholders
-            ops.reset_default_graph()
+            tf.reset_default_graph()
             #  encoder inputs : list of indices of length xseq_len
             self.enc_ip = [ tf.placeholder(shape=[None,], 
                             dtype=tf.int64, 
@@ -101,7 +99,7 @@ class Seq2Seq(object):
     # run one batch for training
     def train_batch(self, sess, train_batch_gen):
         # get batches
-        batchX, batchY = train_batch_gen.__next__()
+        batchX, batchY = train_batch_gen.next()
         # build feed
         feed_dict = self.get_feed(batchX, batchY, keep_prob=0.5)
         _, loss_v = sess.run([self.train_op, self.loss], feed_dict)
@@ -109,7 +107,7 @@ class Seq2Seq(object):
 
     def eval_step(self, sess, eval_batch_gen):
         # get batches
-        batchX, batchY = eval_batch_gen.__next__()
+        batchX, batchY = eval_batch_gen.next()
         # build feed
         feed_dict = self.get_feed(batchX, batchY, keep_prob=1.)
         loss_v, dec_op_v = sess.run([self.loss, self.decode_outputs_test], feed_dict)
