@@ -1,0 +1,30 @@
+# all docker containers
+docker ps -a
+# run docker inception net
+
+#start
+docker start 0c5b38333b0b -a -i
+docker run -it filip_server/inception_serving
+
+# get image
+wget https://upload.wikimedia.org/wikipedia/en/a/ac/Xiang_Xiang_panda.jpg
+
+# start server
+
+bazel-bin/tensorflow_serving/model_servers/tensorflow_model_server --port=9000 --model_name=inception --model_base_path=/tmp/inception-export &> inception_log &
+tensorflow_model_server --port=9500 --model_name=mnist --model_base_path=/tmp/mnist_model &> mnist_log &
+
+
+
+# run client
+bazel-bin/tensorflow_serving/example/inception_client --server=localhost:9000 --image=./Xiang_Xiang_panda.jpg
+python Reddit_chatbot_production/mnist_client2.py --server=localhost:9500 --num_tests=1000
+
+
+# mnist need
+pip install tensorflow 
+pip install tensorflow-serving-api
+
+
+# clone 
+git clone https://github.com/FilipByren/Reddit_chatbot_production.git
