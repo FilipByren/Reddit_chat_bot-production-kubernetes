@@ -5,7 +5,7 @@ import tensorflow as tf
 import numpy as np
 
 # preprocessed data
-from datasets import data
+import data
 import data_utils
 
 print("Process data")

@@ -114,11 +114,11 @@ def split_row_words_to_list(df):
 def tokenized(df):
     return df['comment_text_vec'].values,df['reply_text_vec'].values
 
-def process_data():
+def process_data(PATH):
 
     print('\n>> Run Panda pipline')
 
-    df = pandas.read_csv(FILENAME, sep='\t',dtype={"reply_text": str, "comment_text": str,"subreddit":str})
+    df = pandas.read_csv(PATH+FILENAME, sep='\t',dtype={"reply_text": str, "comment_text": str,"subreddit":str})
 
     qtokenized,atokenized = (df.pipe(remove_columns)
         .pipe(lower_case_word)
@@ -137,8 +137,8 @@ def process_data():
 
     print('\n >> Save numpy arrays to disk')
     # save them
-    np.save('idx_q.npy', idx_q)
-    np.save('idx_a.npy', idx_a)
+    np.save('datasets/idx_q.npy', idx_q)
+    np.save('datasets/idx_a.npy', idx_a)
 
     # let us now save the necessary dictionaries
     metadata = {
@@ -149,7 +149,7 @@ def process_data():
                 }
 
     # write to disk : data control dictionaries
-    with open('metadata.pkl', 'wb') as f:
+    with open('datasets/metadata.pkl', 'wb') as f:
         pickle.dump(metadata, f)
 
 def load_data(PATH=''):
@@ -162,9 +162,11 @@ def load_data(PATH=''):
     return metadata, idx_q, idx_a
 
 def load_metadata(PATH=''):
+    # read data control dictionaries
     with open(PATH + 'metadata.pkl', 'rb') as f:
         metadata = pickle.load(f)
     return metadata
+
 
 
 if __name__ == '__main__':
