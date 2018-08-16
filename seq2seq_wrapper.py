@@ -3,6 +3,7 @@ import numpy as np
 import sys
 import time
 import os
+import tensorflow.contrib
 
 class Seq2Seq(object):
 
