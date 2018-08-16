@@ -144,15 +144,9 @@ class Seq2Seq(object):
         for i in range(self.epochs):
             try:
                 self.train_batch(sess, train_set)
-<<<<<<< HEAD
                 if i and i% (self.epochs//1) == 0:
                     print('\nAt iteration #{}'.format(i))
                 if i and i% (self.epochs//9) == 0: # TODO : make this tunable by the user
-=======
-                if i and i% (self.epochs//100) == 0:
-                    print('\nAt iteration #{}'.format(i))
-                if i and i% (self.epochs//10000) == 0: # TODO : make this tunable by the user
->>>>>>> 5b368e7a3c8a6dc33b30463ab8d13ab5fbb6d589
                     # save model to disk
                     saver.save(sess, self.ckpt_path + self.model_name + '.ckpt', global_step=i)
                     # evaluate to get validation loss
@@ -194,7 +188,7 @@ class Seq2Seq(object):
             # Restore from checkpoint
             loader = tf.train.import_meta_graph(self.ckpt_path+ 'seq2seq_model.ckpt-5.meta') # need to be changed later
             ckpt = tf.train.get_checkpoint_state(self.ckpt_path)
-        # restore session
+            # restore session
             if ckpt and ckpt.model_checkpoint_path:
                 loader.restore(sess, ckpt.model_checkpoint_path)
             
