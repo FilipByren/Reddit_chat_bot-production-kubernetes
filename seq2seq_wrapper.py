@@ -1,8 +1,9 @@
-from tensorflow.python.framework import ops as tf
+from tensorflow.python.framework import ops
 import numpy as np
 import sys
 import time
 import os
+import tensorflow as tf
 import tensorflow.contrib
 
 class Seq2Seq(object):
@@ -28,7 +29,7 @@ class Seq2Seq(object):
         def __graph__():
 
             # placeholders
-            tf.reset_default_graph()
+            ops.reset_default_graph()
             #  encoder inputs : list of indices of length xseq_len
             self.enc_ip = [ tf.placeholder(shape=[None,], 
                             dtype=tf.int64, 
