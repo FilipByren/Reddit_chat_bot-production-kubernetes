@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.client {
+    border-color: #ccc;
+    background-color: #fff;
+    width: 80%;
+    float: right;
+}
+.bot{
+  background-color: #99ffcc;
+    border-color: #ccc;
+    width: 80%;
+    float: left;
+}
+
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+}
+h2 {
+    width: 100%;
+    text-align:center;
+    border-color: #ccc;
+}
+
+.messageinput {
+    width: 100%;
+    padding:10px;
+    border:1px solid #ccc;
+    margin:0 0 0;
+    border-radius: 20px;
+}
+  footer {
+    width:720px;
+    margin:auto;
+  }
+
+</style>
+</head>
+<body>
+
+<h2>Trump Bot</h2>
+<hr>
+<div style='height:640px; overflow:auto;' id ="scroll">
+  <ul id="board">
+  </ul>
+  <script>
+  function bot_answer(msg_text) {
+      setTimeout(function(){ 
+        var node = document.createElement("div");
+        node.className = "container bot";
+
+        var img = document.createElement("img");
+        img.src = "trump.jpeg";
+        img.alt = "Avatar";
+        img.width = "100%";
+        node.appendChild(img);
+
+        var p = document.createElement("p");
+        var msg = document.createTextNode(msg_text);
+        p.appendChild(msg);
+        node.appendChild(img);
+        node.appendChild(p);
+
+        document.getElementById("board").appendChild(node);
+        var objDiv = document.getElementById("scroll");
+        objDiv.scrollTop = objDiv.scrollHeight;
+      }, getRandomInt(3000,8000));
+  }
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function send_message(){
+      var node = document.createElement("div");
+      node.className = "container client";
+
+      var img = document.createElement("img");
+      img.src = "user.jpeg";
+      img.alt = "Avatar";
+      img.width = "100%";
+      img.className="right";
+      node.appendChild(img);
+
+      var p = document.createElement("p");
+      msg_text = document.getElementById("input_msg").value;
+      document.getElementById("input_msg").value = "";
+      var msg = document.createTextNode(msg_text);
+      if (msg.length == 0){
+        return;
+      }
+      p.appendChild(msg);
+      node.appendChild(img);
+      node.appendChild(p);
+      document.getElementById("board").appendChild(node);
+      var objDiv = document.getElementById("scroll");
+      objDiv.scrollTop = objDiv.scrollHeight;
+      bot_answer('build da wall');
+  }
+
+  </script>
+</div>
+<br>
+<center>
+  <input style="border: 2px solid #dedede; border-radius: 20px;padding: 10px; margin: 10px text-align:center;0;height:30px;width:70%;font-size:14pt; bottom:0%; opacity: 1;" type="text" id="input_msg" placeholder="Message" maxlength="20" onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('send_btn').click()"  >
+    <button style="height:60px;width:60px; border: 2px solid #dedede;border-radius: 20px;10px;" onclick="send_message()" id="send_btn">
+      <img src="send.svg" alt="submit" />
+    </button>   
+  </input>
+</center>
+</body>
+</html>
