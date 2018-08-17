@@ -19,7 +19,7 @@ flags.DEFINE_string('server', 'localhost:9000',
 flags.DEFINE_string('data','', 'Word')
 FLAGS = flags.FLAGS
 
-from datasets import data
+import data
 import data_utils
 
 # load data from pickle and npy files
@@ -32,7 +32,6 @@ def main(_):
   # Send request
   with open(FLAGS.image, 'rb') as f:
     # See prediction_service.proto for gRPC request/response details.
-    data = f.read()
     encode_test_input = data_utils.encode([f.read()],w2idx)
     request = predict_pb2.PredictRequest()
     request.inputs.CopyFrom(tf.contrib.util.make_tensor_proto(encode_test_input))
