@@ -14,7 +14,7 @@ from absl import app
 flags.DEFINE_string('server', 'localhost:9000',
                            'PredictionService host:port')
 flags.DEFINE_string('model_name','saved', 'Word')
-flags.DEFINE_string('signature_name','serving_default', 'Word')
+flags.DEFINE_string('signature_name','default_v3_def', 'Word')
 FLAGS = flags.FLAGS
 
 

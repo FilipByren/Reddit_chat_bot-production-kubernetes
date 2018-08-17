@@ -55,9 +55,8 @@ with tf.Session() as sess:
     sess=sess,
     tags=[tf.saved_model.tag_constants.SERVING],
     signature_def_map={
-      tf.saved_model.signature_constants.DEFAULT_SERVING_SIGNATURE_DEF_KEY: default_v3_def,
-      "predict_v4": predict_v4_def
+      "default_v3_def": default_v3_def
     }
   )
 
-  builder.save(as_text=False)
+  builder.save()
