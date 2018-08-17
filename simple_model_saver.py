@@ -16,7 +16,7 @@ init_op = tf.global_variables_initializer()
 # Add ops to save and restore all the variables.
 saver = tf.train.Saver()
 
-export_dir = './saved/2'
+export_dir = './saved/1'
 
 builder = tf.saved_model.builder.SavedModelBuilder(export_dir=export_dir)
 
@@ -55,8 +55,9 @@ with tf.Session() as sess:
     sess=sess,
     tags=[tf.saved_model.tag_constants.SERVING],
     signature_def_map={
-      "default_v3_def": default_v3_def
+      "default_v3_def": default_v3_def,
+      "v4":predict_v4_def
     }
   )
 
-  builder.save()
+  builder.save(as_text=False)
