@@ -16,7 +16,7 @@ init_op = tf.global_variables_initializer()
 # Add ops to save and restore all the variables.
 saver = tf.train.Saver()
 
-export_dir = './saved/1'
+export_dir = './saved/2'
 
 builder = tf.saved_model.builder.SavedModelBuilder(export_dir=export_dir)
 
