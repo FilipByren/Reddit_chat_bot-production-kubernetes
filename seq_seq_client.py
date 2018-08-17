@@ -23,7 +23,7 @@ import data
 import data_utils
 
 # load data from pickle and npy files
-metadata= data.load_metadata(PATH='/')
+metadata= data.load_metadata(PATH='datasets/')
 
 
 def main(_):
