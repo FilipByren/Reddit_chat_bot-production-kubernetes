@@ -10,7 +10,7 @@ from tensorflow_serving.apis import predict_pb2
 from tensorflow_serving.apis import prediction_service_pb2
 
 from absl import flags
-
+from absl import app
 flags.DEFINE_string('server', 'localhost:9000',
                            'PredictionService host:port')
 flags.DEFINE_string('data','', 'Word')
