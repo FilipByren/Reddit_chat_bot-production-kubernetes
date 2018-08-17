@@ -30,7 +30,7 @@ def main(_):
   channel = grpc.insecure_channel(FLAGS.server)
   stub = prediction_service_pb2_grpc.PredictionServiceStub(channel)
   # Send request
-  with open(FLAGS.image, 'rb') as f:
+  with open(FLAGS.data, 'rb') as f:
     # See prediction_service.proto for gRPC request/response details.
     encode_test_input = data_utils.encode([f.read()],w2idx)
     request = predict_pb2.PredictRequest()
