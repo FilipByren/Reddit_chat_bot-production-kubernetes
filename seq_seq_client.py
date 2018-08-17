@@ -35,17 +35,16 @@ def main(_):
     data = f.read()
     encode_test_input = data_utils.encode([f.read()],w2idx)
     request = predict_pb2.PredictRequest()
-    request.inputs.CopyFrom(
-      tf.contrib.util.make_tensor_proto(encode_test_input))
+    request.inputs.CopyFrom(tf.contrib.util.make_tensor_proto(encode_test_input))
     output = stub.Predict(request, 10.0)  # 10 secs timeout
     replies = []
-  	for ii, oi in zip(encode_test_input, output):
-  	    q = data_utils.decode(sequence=ii, lookup=metadata['idx2w'], separator=' ')
-  	    decoded = data_utils.decode(sequence=oi, lookup=metadata['idx2w'], separator=' ').split(' ')
-  	    if decoded.count('unk') == 0:
-  	        #if decoded not in replies:
-  	        print('q : [{0}]; a : [{1}]'.format(q, ' '.join(decoded)))
-  	        replies.append(decoded)
+    for ii, oi in zip(encode_test_input, output):
+        q = data_utils.decode(sequence=ii, lookup=metadata['idx2w'], separator=' ')
+        decoded = data_utils.decode(sequence=oi, lookup=metadata['idx2w'], separator=' ').split(' ')
+        if decoded.count('unk') == 0:
+            #if decoded not in replies:
+            print('q : [{0}]; a : [{1}]'.format(q, ' '.join(decoded)))
+            replies.append(decoded)
 
 
 if __name__ == '__main__':
