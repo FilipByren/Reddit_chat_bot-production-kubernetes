@@ -20,7 +20,7 @@ FLAGS = flags.FLAGS
 
 
 
-def main():
+def main(_):
 
   channel = implementations.insecure_channel(FLAGS.server)
   stub = prediction_service_pb2.beta_create_PredictionService_stub(channel)
