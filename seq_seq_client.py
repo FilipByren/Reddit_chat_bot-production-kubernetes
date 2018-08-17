@@ -31,7 +31,7 @@ def main(_):
   stub = prediction_service_pb2_grpc.PredictionServiceStub(channel)
   # Send request
   # See prediction_service.proto for gRPC request/response details.
-  encode_test_input = data_utils.encode([FLAGS.data],w2idx)
+  encode_test_input = data_utils.encode([FLAGS.data],metadata['w2idx'])
   request = predict_pb2.PredictRequest()
   request.inputs.CopyFrom(tf.contrib.util.make_tensor_proto(encode_test_input))
   output = stub.Predict(request, 10.0)  # 10 secs timeout
